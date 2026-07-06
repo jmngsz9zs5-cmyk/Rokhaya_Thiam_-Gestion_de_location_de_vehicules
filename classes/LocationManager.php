@@ -141,6 +141,30 @@ class LocationManager
     }
 
     /**
+     * Indique si au moins une location est liee a ce vehicule.
+     */
+    public function possedeLocationsPourVehicule(int $vehiculeId): bool
+    {
+        $sql = 'SELECT COUNT(*) FROM location WHERE vehicule_id = :vehicule_id';
+        $requete = $this->connexion->prepare($sql);
+        $requete->execute(['vehicule_id' => $vehiculeId]);
+
+        return (int) $requete->fetchColumn() > 0;
+    }
+
+    /**
+     * Indique si au moins une location est liee a ce client.
+     */
+    public function possedeLocationsPourClient(int $clientId): bool
+    {
+        $sql = 'SELECT COUNT(*) FROM location WHERE client_id = :client_id';
+        $requete = $this->connexion->prepare($sql);
+        $requete->execute(['client_id' => $clientId]);
+
+        return (int) $requete->fetchColumn() > 0;
+    }
+
+    /**
      * Retourne la liste des locations dont le statut est "en cours".
      *
      * @return Location[]

@@ -2,20 +2,34 @@
 // Vue : liste des vehicules
 
 require_once __DIR__ . '/../classes/VehiculeManager.php';
+require_once __DIR__ . '/../classes/LocationManager.php';
 
 $vehiculeManager = new VehiculeManager();
+$locationManager = new LocationManager();
+
+$erreur = null;
 
 // Suppression d'un vehicule si demandee
 if (isset($_GET['supprimer'])) {
-    $vehiculeManager->supprimer((int) $_GET['supprimer']);
-    header('Location: index.php?page=vehicules');
-    exit;
+    $idASupprimer = (int) $_GET['supprimer'];
+
+    if ($locationManager->possedeLocationsPourVehicule($idASupprimer)) {
+        $erreur = 'Impossible de supprimer ce vehicule : il est lie a une ou plusieurs locations.';
+    } else {
+        $vehiculeManager->supprimer($idASupprimer);
+        header('Location: index.php?page=vehicules');
+        exit;
+    }
 }
 
 $vehicules = $vehiculeManager->lister();
 ?>
 
 <h2>Liste des vehicules</h2>
+
+<?php if ($erreur): ?>
+    <p class="erreur"><?= htmlspecialchars($erreur) ?></p>
+<?php endif; ?>
 
 <p><a class="btn" href="index.php?page=vehicule_formulaire">Ajouter un vehicule</a></p>
 
