@@ -9,18 +9,29 @@ $locationManager = new LocationManager();
 $vehiculeManager = new VehiculeManager();
 $clientManager = new ClientManager();
 
+$erreur = null;
+$dateDebutSaisie = '';
+$dateFinSaisie = '';
+
 // Traitement du formulaire
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $location = new Location(
-        (int) $_POST['vehicule_id'],
-        (int) $_POST['client_id'],
-        $_POST['date_debut'],
-        $_POST['date_fin']
-    );
-    $locationManager->ajouter($location);
+    $dateDebutSaisie = $_POST['date_debut'];
+    $dateFinSaisie = $_POST['date_fin'];
 
-    header('Location: index.php?page=locations');
-    exit;
+    if ($dateFinSaisie < $dateDebutSaisie) {
+        $erreur = 'La date de fin ne peut pas etre anterieure a la date de debut.';
+    } else {
+        $location = new Location(
+            (int) $_POST['vehicule_id'],
+            (int) $_POST['client_id'],
+            $dateDebutSaisie,
+            $dateFinSaisie
+        );
+        $locationManager->ajouter($location);
+
+        header('Location: index.php?page=locations');
+        exit;
+    }
 }
 
 $vehicules = array_filter($vehiculeManager->lister(), fn($v) => $v->isDisponible());
@@ -28,6 +39,10 @@ $clients = $clientManager->lister();
 ?>
 
 <h2>Enregistrer une location</h2>
+
+<?php if ($erreur): ?>
+    <p class="erreur"><?= htmlspecialchars($erreur) ?></p>
+<?php endif; ?>
 
 <?php if (empty($vehicules)): ?>
     <p>Aucun vehicule disponible actuellement.</p>
@@ -54,12 +69,21 @@ $clients = $clientManager->lister();
         </label>
 
         <label>Date de debut
-            <input type="date" name="date_debut" required>
+            <input type="date" name="date_debut" id="date_debut" value="<?= htmlspecialchars($dateDebutSaisie) ?>" required>
         </label>
 
         <label>Date de fin
-            <input type="date" name="date_fin" required>
+            <input type="date" name="date_fin" id="date_fin" value="<?= htmlspecialchars($dateFinSaisie) ?>" required>
         </label>
+
+        <script>
+            // Empeche visuellement de choisir une date de fin avant la date de debut
+            const champDebut = document.getElementById('date_debut');
+            const champFin = document.getElementById('date_fin');
+            champDebut.addEventListener('change', () => {
+                champFin.min = champDebut.value;
+            });
+        </script>
 
         <button type="submit">Enregistrer la location</button>
         <a href="index.php?page=locations">Annuler</a>

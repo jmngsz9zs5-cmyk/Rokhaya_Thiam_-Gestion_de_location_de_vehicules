@@ -37,11 +37,17 @@ $vehicules = $vehiculeManager->lister();
                 <td><?= htmlspecialchars($vehicule->getModele()) ?></td>
                 <td><?= htmlspecialchars($vehicule->getImmatriculation()) ?></td>
                 <td><?= htmlspecialchars(number_format($vehicule->getPrixParJour(), 2)) ?></td>
-                <td><?= $vehicule->isDisponible() ? 'Oui' : 'Non' ?></td>
                 <td>
+                    <?php if ($vehicule->isDisponible()): ?>
+                        <span class="badge badge-succes">Disponible</span>
+                    <?php else: ?>
+                        <span class="badge badge-neutre">Loue</span>
+                    <?php endif; ?>
+                </td>
+                <td class="actions">
                     <a href="index.php?page=vehicule_formulaire&id=<?= $vehicule->getId() ?>">Modifier</a>
-                    |
                     <a href="index.php?page=vehicules&supprimer=<?= $vehicule->getId() ?>"
+                       class="lien-danger"
                        onclick="return confirm('Confirmer la suppression ?');">Supprimer</a>
                 </td>
             </tr>

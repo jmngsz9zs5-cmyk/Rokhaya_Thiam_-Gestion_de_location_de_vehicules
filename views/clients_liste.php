@@ -32,10 +32,10 @@ $clients = $clientManager->lister();
             <tr>
                 <td><?= htmlspecialchars($client->getNom()) ?></td>
                 <td><?= htmlspecialchars($client->getTelephone()) ?></td>
-                <td>
+                <td class="actions">
                     <a href="index.php?page=client_formulaire&id=<?= $client->getId() ?>">Modifier</a>
-                    |
                     <a href="index.php?page=clients&supprimer=<?= $client->getId() ?>"
+                       class="lien-danger"
                        onclick="return confirm('Confirmer la suppression ?');">Supprimer</a>
                 </td>
             </tr>

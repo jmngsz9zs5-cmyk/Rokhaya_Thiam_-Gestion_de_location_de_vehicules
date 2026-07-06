@@ -26,11 +26,10 @@ $locations = $filtreEnCours ? $locationManager->listerEnCours() : $locationManag
     <a class="btn" href="index.php?page=location_formulaire">Enregistrer une location</a>
 </p>
 
-<p>
-    <a href="index.php?page=locations">Toutes les locations</a>
-    |
-    <a href="index.php?page=locations&filtre=en_cours">Locations en cours</a>
-</p>
+<div class="onglets">
+    <a href="index.php?page=locations" class="<?= !$filtreEnCours ? 'actif' : '' ?>">Toutes les locations</a>
+    <a href="index.php?page=locations&filtre=en_cours" class="<?= $filtreEnCours ? 'actif' : '' ?>">Locations en cours</a>
+</div>
 
 <table>
     <thead>
@@ -54,8 +53,14 @@ $locations = $filtreEnCours ? $locationManager->listerEnCours() : $locationManag
                 <td><?= $client ? htmlspecialchars($client->getNom()) : '-' ?></td>
                 <td><?= htmlspecialchars($location->getDateDebut()) ?></td>
                 <td><?= htmlspecialchars($location->getDateFin()) ?></td>
-                <td><?= htmlspecialchars($location->getStatut()) ?></td>
                 <td>
+                    <?php if ($location->getStatut() === 'en cours'): ?>
+                        <span class="badge badge-succes">En cours</span>
+                    <?php else: ?>
+                        <span class="badge badge-neutre">Terminee</span>
+                    <?php endif; ?>
+                </td>
+                <td class="actions">
                     <?php if ($location->getStatut() === 'en cours'): ?>
                         <a href="index.php?page=locations&retour=<?= $location->getId() ?>"
                            onclick="return confirm('Confirmer le retour du vehicule ?');">Marquer le retour</a>
