@@ -3,3 +3,6 @@ vendor/
 *.log
 Thumbs.db
 .DS_Store
+
+# Dossier personnel : notes de presentation/soutenance, ne doit pas etre publie sur GitHub
+presentation-personnelle/
