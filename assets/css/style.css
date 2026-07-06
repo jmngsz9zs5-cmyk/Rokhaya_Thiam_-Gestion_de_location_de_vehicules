@@ -176,6 +176,102 @@ main a:hover {
     text-decoration: underline;
 }
 
+/* ---------- Accueil / tableau de bord ---------- */
+
+.accueil-hero h2 {
+    font-size: 1.6rem;
+}
+
+.accueil-hero p {
+    font-size: 1rem;
+    max-width: 46ch;
+}
+
+.stats-grille {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin: 1.6rem 0 2.2rem;
+}
+
+.stat-carte {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
+    background: linear-gradient(160deg, #fbfbfe, #f3f4fb);
+    border: 1px solid var(--bordure);
+    border-radius: var(--rayon);
+    padding: 1.2rem 1.3rem;
+    box-shadow: var(--ombre-sm);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.stat-carte:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--ombre-md);
+}
+
+.stat-icone {
+    font-size: 1.5rem;
+}
+
+.stat-valeur {
+    font-family: "Poppins", sans-serif;
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: var(--primaire-fonce);
+    line-height: 1.1;
+}
+
+.stat-libelle {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--texte-doux);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.actions-grille {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 1rem;
+    margin-top: 1.2rem;
+}
+
+.action-carte {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.9rem;
+    background-color: var(--carte);
+    border: 1px solid var(--bordure);
+    border-radius: var(--rayon);
+    padding: 1.2rem 1.3rem;
+    text-decoration: none !important;
+    color: var(--texte);
+    box-shadow: var(--ombre-sm);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.action-carte:hover {
+    transform: translateY(-3px);
+    border-color: var(--primaire-clair);
+    box-shadow: var(--ombre-md);
+}
+
+.action-carte strong {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 0.2rem;
+    color: var(--texte);
+}
+
+.action-carte p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--texte-doux);
+}
+
 .erreur {
     color: var(--danger);
     background-color: var(--danger-fond);
