@@ -1,0 +1,54 @@
+<?php
+// Vue : liste des vehicules
+
+require_once __DIR__ . '/../classes/VehiculeManager.php';
+
+$vehiculeManager = new VehiculeManager();
+
+// Suppression d'un vehicule si demandee
+if (isset($_GET['supprimer'])) {
+    $vehiculeManager->supprimer((int) $_GET['supprimer']);
+    header('Location: index.php?page=vehicules');
+    exit;
+}
+
+$vehicules = $vehiculeManager->lister();
+?>
+
+<h2>Liste des vehicules</h2>
+
+<p><a class="btn" href="index.php?page=vehicule_formulaire">Ajouter un vehicule</a></p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Marque</th>
+            <th>Modele</th>
+            <th>Immatriculation</th>
+            <th>Prix / jour</th>
+            <th>Disponible</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($vehicules as $vehicule): ?>
+            <tr>
+                <td><?= htmlspecialchars($vehicule->getMarque()) ?></td>
+                <td><?= htmlspecialchars($vehicule->getModele()) ?></td>
+                <td><?= htmlspecialchars($vehicule->getImmatriculation()) ?></td>
+                <td><?= htmlspecialchars(number_format($vehicule->getPrixParJour(), 2)) ?></td>
+                <td><?= $vehicule->isDisponible() ? 'Oui' : 'Non' ?></td>
+                <td>
+                    <a href="index.php?page=vehicule_formulaire&id=<?= $vehicule->getId() ?>">Modifier</a>
+                    |
+                    <a href="index.php?page=vehicules&supprimer=<?= $vehicule->getId() ?>"
+                       onclick="return confirm('Confirmer la suppression ?');">Supprimer</a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+
+        <?php if (empty($vehicules)): ?>
+            <tr><td colspan="6">Aucun vehicule enregistre.</td></tr>
+        <?php endif; ?>
+    </tbody>
+</table>
