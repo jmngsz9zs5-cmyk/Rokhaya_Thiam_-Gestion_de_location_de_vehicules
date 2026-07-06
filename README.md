@@ -33,7 +33,13 @@ Gestion de location de vehicules/
 
 ## Installation (XAMPP)
 
-1. Cloner ou copier ce projet dans le dossier `htdocs` de XAMPP.
+1. Se placer dans le dossier `htdocs` de XAMPP puis cloner le depot :
+
+   ```
+   cd C:/xampp/htdocs
+   git clone https://github.com/jmngsz9zs5-cmyk/Rokhaya_Thiam_-Gestion_de_location_de_vehicules.git "Gestion de location de vehicules"
+   ```
+
 2. Demarrer Apache et MySQL depuis le panneau de controle XAMPP.
 3. Importer la base de donnees :
    - Ouvrir phpMyAdmin (`http://localhost/phpmyadmin`)
