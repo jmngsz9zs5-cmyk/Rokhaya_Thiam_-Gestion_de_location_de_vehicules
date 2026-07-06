@@ -1,103 +1,262 @@
+/* ---------- Base ---------- */
+
 * {
     box-sizing: border-box;
 }
 
-body {
-    margin: 0;
-    font-family: "Segoe UI", Arial, sans-serif;
-    background-color: #f4f6f8;
-    color: #212529;
+:root {
+    --couleur-primaire: #2f6fed;
+    --couleur-primaire-hover: #2559c2;
+    --couleur-fond: #f1f4f9;
+    --couleur-texte: #1e2430;
+    --couleur-texte-doux: #647085;
+    --couleur-bordure: #e2e6ec;
+    --couleur-carte: #ffffff;
+    --ombre: 0 1px 3px rgba(16, 24, 40, 0.08), 0 1px 2px rgba(16, 24, 40, 0.05);
+    --rayon: 10px;
 }
 
+body {
+    margin: 0;
+    font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+    background-color: var(--couleur-fond);
+    color: var(--couleur-texte);
+    line-height: 1.5;
+}
+
+/* ---------- Entete ---------- */
+
 header {
-    background-color: #1f2d3d;
+    background: linear-gradient(135deg, #1f2d3d, #16202c);
     color: #ffffff;
-    padding: 1rem 2rem;
+    padding: 1.1rem 2.5rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
 }
 
 header h1 {
-    margin: 0 0 0.5rem 0;
-    font-size: 1.4rem;
+    margin: 0 0 0.7rem 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
 }
 
 nav a {
     color: #cfe0f0;
     text-decoration: none;
-    margin-right: 1.2rem;
-    font-size: 0.95rem;
+    padding: 0.4rem 0.85rem;
+    border-radius: 6px;
+    font-size: 0.92rem;
+    font-weight: 500;
+    transition: background-color 0.15s ease, color 0.15s ease;
 }
 
 nav a:hover {
-    text-decoration: underline;
+    background-color: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
 }
 
+/* ---------- Contenu principal ---------- */
+
 main {
-    max-width: 960px;
-    margin: 2rem auto;
-    padding: 0 1.5rem;
+    max-width: 1000px;
+    margin: 2.2rem auto;
+    padding: 2rem 2.2rem;
+    background-color: var(--couleur-carte);
+    border: 1px solid var(--couleur-bordure);
+    border-radius: var(--rayon);
+    box-shadow: var(--ombre);
 }
 
 h2 {
-    color: #1f2d3d;
-    border-bottom: 2px solid #d8dee4;
-    padding-bottom: 0.4rem;
+    margin-top: 0;
+    color: var(--couleur-texte);
+    font-size: 1.3rem;
+    padding-left: 0.8rem;
+    border-left: 4px solid var(--couleur-primaire);
 }
+
+h3 {
+    color: var(--couleur-texte);
+    font-size: 1.05rem;
+}
+
+p {
+    color: var(--couleur-texte-doux);
+}
+
+main > ul {
+    padding-left: 1.2rem;
+}
+
+main a {
+    color: var(--couleur-primaire);
+    text-decoration: none;
+}
+
+main a:hover {
+    text-decoration: underline;
+}
+
+/* ---------- Tableaux ---------- */
 
 table {
     width: 100%;
     border-collapse: collapse;
-    background-color: #ffffff;
-    margin-top: 1rem;
+    margin-top: 1.2rem;
+    border: 1px solid var(--couleur-bordure);
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 th, td {
-    padding: 0.6rem 0.8rem;
-    border: 1px solid #d8dee4;
+    padding: 0.75rem 1rem;
     text-align: left;
 }
 
 th {
-    background-color: #e9edf1;
+    background-color: #f6f8fb;
+    color: var(--couleur-texte-doux);
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-bottom: 1px solid var(--couleur-bordure);
 }
 
+tbody tr {
+    border-bottom: 1px solid var(--couleur-bordure);
+    transition: background-color 0.12s ease;
+}
+
+tbody tr:last-child {
+    border-bottom: none;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #fafbfd;
+}
+
+tbody tr:hover {
+    background-color: #eef3fc;
+}
+
+td a {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* ---------- Formulaires ---------- */
+
 form {
-    background-color: #ffffff;
-    border: 1px solid #d8dee4;
-    border-radius: 6px;
-    padding: 1.2rem;
+    background-color: #fafbfd;
+    border: 1px solid var(--couleur-bordure);
+    border-radius: var(--rayon);
+    padding: 1.5rem;
     max-width: 480px;
+    margin-top: 1.2rem;
+}
+
+form + form {
     margin-top: 1rem;
 }
 
 form label {
     display: block;
-    margin-bottom: 0.9rem;
+    margin-bottom: 1.1rem;
     font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--couleur-texte-doux);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
 }
 
 form input,
 form select {
     display: block;
     width: 100%;
-    margin-top: 0.3rem;
-    padding: 0.45rem;
-    border: 1px solid #c3cbd3;
-    border-radius: 4px;
+    margin-top: 0.4rem;
+    padding: 0.55rem 0.7rem;
+    border: 1px solid #c9d0da;
+    border-radius: 6px;
     font-size: 0.95rem;
+    font-family: inherit;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: normal;
+    color: var(--couleur-texte);
+    background-color: #ffffff;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
+
+form input:focus,
+form select:focus {
+    outline: none;
+    border-color: var(--couleur-primaire);
+    box-shadow: 0 0 0 3px rgba(47, 111, 237, 0.15);
+}
+
+form input[type="checkbox"] {
+    display: inline-block;
+    width: auto;
+    margin: 0 0.4rem 0 0;
+    vertical-align: middle;
+}
+
+/* ---------- Boutons ---------- */
 
 button, .btn {
     display: inline-block;
-    background-color: #2f6fed;
+    background-color: var(--couleur-primaire);
     color: #ffffff;
     border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
     cursor: pointer;
     text-decoration: none;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.1);
+    transition: background-color 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
 }
 
 button:hover, .btn:hover {
-    background-color: #2559c2;
+    background-color: var(--couleur-primaire-hover);
+    box-shadow: 0 4px 10px rgba(47, 111, 237, 0.25);
+    text-decoration: none;
+}
+
+button:active, .btn:active {
+    transform: translateY(1px);
+}
+
+form > a {
+    display: inline-block;
+    margin-left: 0.6rem;
+    color: var(--couleur-texte-doux);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 640px) {
+    header {
+        padding: 1rem 1.2rem;
+    }
+
+    main {
+        margin: 1rem;
+        padding: 1.2rem;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+    }
 }
