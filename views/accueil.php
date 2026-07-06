@@ -23,22 +23,22 @@ $nbLocationsEnCours = count($locationManager->listerEnCours());
 
 <div class="stats-grille">
     <div class="stat-carte">
-        <span class="stat-icone">🚗</span>
+        <span class="icone-pastille teinte-primaire"><?= icone('vehicule') ?></span>
         <span class="stat-valeur"><?= $nbVehicules ?></span>
         <span class="stat-libelle">Vehicules</span>
     </div>
     <div class="stat-carte">
-        <span class="stat-icone">✅</span>
+        <span class="icone-pastille teinte-succes"><?= icone('disponible') ?></span>
         <span class="stat-valeur"><?= $nbVehiculesDisponibles ?></span>
         <span class="stat-libelle">Disponibles</span>
     </div>
     <div class="stat-carte">
-        <span class="stat-icone">👤</span>
+        <span class="icone-pastille teinte-violet"><?= icone('client') ?></span>
         <span class="stat-valeur"><?= $nbClients ?></span>
         <span class="stat-libelle">Clients</span>
     </div>
     <div class="stat-carte">
-        <span class="stat-icone">📋</span>
+        <span class="icone-pastille teinte-ambre"><?= icone('location') ?></span>
         <span class="stat-valeur"><?= $nbLocationsEnCours ?></span>
         <span class="stat-libelle">Locations en cours</span>
     </div>
@@ -48,28 +48,28 @@ $nbLocationsEnCours = count($locationManager->listerEnCours());
 
 <div class="actions-grille">
     <a class="action-carte" href="index.php?page=vehicules">
-        <span class="stat-icone">🚗</span>
+        <span class="icone-pastille teinte-primaire"><?= icone('vehicule') ?></span>
         <div>
             <strong>Gerer les vehicules</strong>
             <p>Ajouter, modifier, suivre la disponibilite</p>
         </div>
     </a>
     <a class="action-carte" href="index.php?page=clients">
-        <span class="stat-icone">👤</span>
+        <span class="icone-pastille teinte-violet"><?= icone('client') ?></span>
         <div>
             <strong>Gerer les clients</strong>
             <p>Ajouter, modifier, consulter la liste</p>
         </div>
     </a>
     <a class="action-carte" href="index.php?page=locations">
-        <span class="stat-icone">📋</span>
+        <span class="icone-pastille teinte-ambre"><?= icone('location') ?></span>
         <div>
             <strong>Gerer les locations</strong>
             <p>Enregistrer une location, marquer un retour</p>
         </div>
     </a>
     <a class="action-carte" href="index.php?page=recherche">
-        <span class="stat-icone">🔍</span>
+        <span class="icone-pastille teinte-succes"><?= icone('recherche') ?></span>
         <div>
             <strong>Rechercher</strong>
             <p>Par marque de vehicule ou par client</p>

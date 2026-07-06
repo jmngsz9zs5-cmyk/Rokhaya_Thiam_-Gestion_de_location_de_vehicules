@@ -31,12 +31,35 @@ $vues = [
 
 // Liens du menu de navigation (icone + libelle), avec detection de la page active
 $menu = [
-    'accueil' => ['icone' => '🏠', 'libelle' => 'Accueil'],
-    'vehicules' => ['icone' => '🚗', 'libelle' => 'Vehicules'],
-    'clients' => ['icone' => '👤', 'libelle' => 'Clients'],
-    'locations' => ['icone' => '📋', 'libelle' => 'Locations'],
-    'recherche' => ['icone' => '🔍', 'libelle' => 'Recherche'],
+    'accueil' => ['icone' => 'accueil', 'libelle' => 'Accueil'],
+    'vehicules' => ['icone' => 'vehicule', 'libelle' => 'Vehicules'],
+    'clients' => ['icone' => 'client', 'libelle' => 'Clients'],
+    'locations' => ['icone' => 'location', 'libelle' => 'Locations'],
+    'recherche' => ['icone' => 'recherche', 'libelle' => 'Recherche'],
 ];
+
+/**
+ * Retourne le balisage SVG d'une icone du jeu d'icones de l'application.
+ * Icones en traits (style outline), heritent de la couleur du texte (currentColor).
+ */
+function icone(string $nom): string
+{
+    $traits = 'fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"';
+
+    $formes = [
+        'accueil' => '<path d="M4 11.5 12 4l8 7.5" /><path d="M6 10v9a1 1 0 0 0 1 1h4v-6h2v6h4a1 1 0 0 0 1-1v-9" />',
+        'vehicule' => '<path d="M4 16V12l1.6-4.2A2 2 0 0 1 7.5 6.5h9a2 2 0 0 1 1.9 1.3L20 12v4" /><rect x="3" y="16" width="18" height="4" rx="1.4" /><circle cx="7.5" cy="19.5" r="1.4" /><circle cx="16.5" cy="19.5" r="1.4" />',
+        'client' => '<circle cx="12" cy="8" r="3.4" /><path d="M5 20c0-3.6 3.1-6.2 7-6.2s7 2.6 7 6.2" />',
+        'location' => '<rect x="5" y="4" width="14" height="17" rx="2" /><path d="M9 3.5h6a1 1 0 0 1 1 1V6H8V4.5a1 1 0 0 1 1-1Z" /><path d="M8.5 11h7M8.5 14.5h7M8.5 18h4" />',
+        'recherche' => '<circle cx="10.5" cy="10.5" r="6" /><path d="m19 19-4.3-4.3" />',
+        'disponible' => '<circle cx="12" cy="12" r="9" /><path d="m8.2 12.3 2.6 2.6 5-5.2" />',
+        'plus' => '<path d="M12 5v14M5 12h14" />',
+    ];
+
+    $chemin = $formes[$nom] ?? '';
+
+    return '<svg viewBox="0 0 24 24" width="18" height="18" ' . $traits . '>' . $chemin . '</svg>';
+}
 
 // Les formulaires appartiennent visuellement a la section parente pour le surlignage du menu
 $pageActive = $page;
@@ -68,7 +91,7 @@ if ($page === 'vehicule_formulaire') {
         <nav>
             <?php foreach ($menu as $cle => $item): ?>
                 <a href="index.php?page=<?= $cle ?>" class="<?= $pageActive === $cle ? 'active' : '' ?>">
-                    <span class="nav-icone"><?= $item['icone'] ?></span><?= $item['libelle'] ?>
+                    <span class="nav-icone"><?= icone($item['icone']) ?></span><?= $item['libelle'] ?>
                 </a>
             <?php endforeach; ?>
         </nav>
